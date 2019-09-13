@@ -328,6 +328,117 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Leagues",
+			"item": [
+				{
+					"name": "List leagues data Test",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "BizBaz@test.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password245",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "danastudent@aol.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/leagues/data",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leagues",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List leagues page",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "BizBaz@test.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password245",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "danastudent@aol.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/leagues",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"leagues"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This supports all services under Leagues section\n\t- List the list of leagues"
 		}
 	]
 }
