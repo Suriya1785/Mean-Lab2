@@ -6,10 +6,10 @@
 It creates the servel level functions to support operation for cricket leagues app such as user login & authentication, registration and list the current leagues using Express Generator. It is pre-requisite for lab-3(i.e. to server the webpage).  
 
 ## Server URL and its functions:
-Root URL    : http://localhost:3000/index (Return index hbs)
-leagues URL : http://localhost:3000/leagues/data (Return list of leagues and display it in browser)
-register URL: http://localhost:3000/users/register (User registration / Validate through postman collection folder)
-User URL    : http://localhost:3000/users/login (user login / Validate through postman collection folder)
+- Root URL    : http://localhost:3000/index (Return index hbs)
+- leagues URL : http://localhost:3000/leagues/data (Return list of leagues and display it in browser)
+- Register URL: http://localhost:3000/users/register (User registration / Validate through postman collection folder)
+- Login URL    : http://localhost:3000/users/login (user login / Validate through postman collection folder)
 
 ## Server setup and start
 This assumes that the user has Node.js installed globally on their machine. Download the project from git and follow the below step. Ignore if express-generator is already installed at global level.
