@@ -19,6 +19,22 @@ usersRouter.get('/register', function(req, res, next) {
     res.render('register', { title: 'register' });
 });
 
+/* Get logout section - Delete user session during logout. */
+usersRouter.get('/logout', function(request, response) {
+    console.log("log out");
+    console.log(request.session.email);
+
+    request.session.destroy(function(e) {
+        if (e) {
+            console.log(e);
+            response.end(e);
+        } else {
+            // it does not work, handled it with client end
+            response.redirect('/index');
+        }
+    })
+});
+
 /* Post and persist user registration info. */
 usersRouter.post('/register', function(request, response, next) {
     // get user data from AJAX request body
@@ -28,11 +44,9 @@ usersRouter.post('/register', function(request, response, next) {
     //insert user to json file
     user = insertUser(username, email, password);
     if (user) {
-        console.log(`success: Added User is ${user}`);
         response.statusCode = 200;
         response.end();
     } else {
-        console.log("failure/unable to insert");
         response.statusCode = 403; // Forbidden
         response.end();
     }
@@ -48,11 +62,13 @@ usersRouter.post('/login', function(request, response) {
     var email = request.body.email;
     var password = request.body.password;
     if (authorization.authorize(email, password, users)) {
+        console.log(`request.session: ${request.session}`);
+        request.session.email = email;
         response.statusCode = 200;
-        console.log("success");
         response.end();
     } else {
         response.statusCode = 403; // Forbidden
+        request.session.email = null;
         response.end();
     }
 });
