@@ -4,6 +4,7 @@
  */
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -12,6 +13,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var leaguesRouter = require('./routes/leagues');
+var teamsRouter = require('./routes/teams');
+var membersRouter = require('./routes/members');
 
 // express app creation
 var app = express();
@@ -39,18 +42,24 @@ hbs.registerHelper('getCurrentYear', function() {
     return new Date().getFullYear();
 })
 
-// logger, bodyparser, cookie parser and static page routing location setup
+// logger, bodyparser, cookie parser, session and static page routing location setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: "sun",
+    resave: "true",
+    saveUninitialized: "true"
+}));
 
 //middleware routing  
 app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 app.use('/leagues', leaguesRouter);
-
+app.use('/teams', teamsRouter);
+app.use('/members', membersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

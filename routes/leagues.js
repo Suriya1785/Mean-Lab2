@@ -18,7 +18,7 @@ leaguesRouter.get('/', function(req, res, next) {
 /* Get leagues data and sends it to client */
 leaguesRouter.get('/data', function(request, response) {
     // set Content-Type for JSON
-    response.setHeader('Content-Type', 'application/json');
+    // response.setHeader('Content-Type', 'application/json');
     response.end(fs.readFileSync('./data/leagues.json'));
 });
 

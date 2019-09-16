@@ -1,4 +1,4 @@
-// This has all utilities to support the app
+// This has authorization utilities to support the app
 // Date: 09/13/2019
 /*
  *This function is to validate the user entered e-mail and password with stored user credentials 
@@ -20,7 +20,16 @@ authorize = function(email, password, users) {
     return false;
 }
 
+sessionValidate = function(userEmail) {
+    if (userEmail) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //Below exposes this function to other js modules
 module.exports = {
-    authorize
+    authorize,
+    sessionValidate
 };
