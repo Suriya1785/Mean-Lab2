@@ -198,6 +198,59 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "User logout - Home page",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "foobar@test.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "danastudent@aol.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -439,6 +492,667 @@
 				}
 			],
 			"description": "This supports all services under Leagues section\n\t- List the list of leagues"
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Get a team by team Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "BizBaz@test.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password245",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "danastudent@aol.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"1"
+							]
+						},
+						"description": "Team details by team id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get list of teams by League",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "washington.sundar@aol.com",
+									"type": "text"
+								},
+								{
+									"key": "membername",
+									"value": "washington sundar",
+									"type": "text"
+								},
+								{
+									"key": "contactname",
+									"value": "washi Sundar",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "21",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "914-741-7777",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/byleague/IPL",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"byleague",
+								"IPL"
+							]
+						},
+						"description": "Get all teams under a league"
+					},
+					"response": []
+				},
+				{
+					"name": "Register a Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "teamname",
+									"value": "Sector",
+									"type": "text"
+								},
+								{
+									"key": "leaguecode",
+									"value": "YT20",
+									"type": "text"
+								},
+								{
+									"key": "managername",
+									"value": "Sector Manager",
+									"type": "text"
+								},
+								{
+									"key": "managerphone",
+									"value": "911-911-1123",
+									"type": "text"
+								},
+								{
+									"key": "manageremail",
+									"value": "sector.manageer@aol.com",
+									"type": "text"
+								},
+								{
+									"key": "maxteammembers",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "minmemberage",
+									"value": "21",
+									"type": "text"
+								},
+								{
+									"key": "maxmemberage",
+									"value": "35",
+									"type": "text"
+								},
+								{
+									"key": "teamgender",
+									"value": "Male",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								""
+							]
+						},
+						"description": "Register a team"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a Team - Success Test",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "teamname",
+									"value": "Team Vanessa",
+									"type": "text"
+								},
+								{
+									"key": "leaguecode",
+									"value": "WT20",
+									"type": "text"
+								},
+								{
+									"key": "managername",
+									"value": "Dana Trainer",
+									"type": "text"
+								},
+								{
+									"key": "managerphone",
+									"value": "914-785-7458",
+									"type": "text"
+								},
+								{
+									"key": "manageremail",
+									"value": "dana.trainer@aol.com",
+									"type": "text"
+								},
+								{
+									"key": "maxteammembers",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "minmemberage",
+									"value": "22",
+									"type": "text"
+								},
+								{
+									"key": "maxmemberage",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "teamgender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "teamid",
+									"value": "130",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								""
+							]
+						},
+						"description": "Edit a team"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a team by team id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "BizBaz@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password245",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "BizBaz",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It contains requests for team operations such as register a team, edit and delete a team",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "Register a Member",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "neha.sharma@aolcom",
+									"type": "text"
+								},
+								{
+									"key": "membername",
+									"value": "Neha Sharma",
+									"type": "text"
+								},
+								{
+									"key": "contactname",
+									"value": "Neha",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "911-911-1122",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "maxmemberage",
+									"value": "35",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "teamgender",
+									"value": "Male",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/members/130",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"members",
+								"130"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a Member",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "neha.sharma@aolcom",
+									"type": "text"
+								},
+								{
+									"key": "membername",
+									"value": "Neha Sharma",
+									"type": "text"
+								},
+								{
+									"key": "contactname",
+									"value": "Neha",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "911-911-1122",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "27",
+									"type": "text"
+								},
+								{
+									"key": "maxmemberage",
+									"value": "35",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "teamgender",
+									"value": "Male",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/members/130",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"members",
+								"130"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Member",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "neha.sharma@aolcom",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "membername",
+									"value": "Neha Sharma",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "contactname",
+									"value": "Neha",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "911-911-1122",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "27",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "maxmemberage",
+									"value": "35",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "teamgender",
+									"value": "Male",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/members/114/110",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"members",
+								"114",
+								"110"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Member details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "neha.sharma@aolcom",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "membername",
+									"value": "Neha Sharma",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "contactname",
+									"value": "Neha",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "gender",
+									"value": "Female",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "911-911-1122",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "27",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "maxmemberage",
+									"value": "35",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "teamgender",
+									"value": "Male",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/members/114/110",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"members",
+								"114",
+								"110"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "contains the list of requests for register a member in a team, edit and delete team member",
+			"protocolProfileBehavior": {}
 		}
 	]
 }

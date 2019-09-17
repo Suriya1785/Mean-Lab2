@@ -148,13 +148,47 @@ function validate(inputData, team) {
 /*Function is to validate the user form before submitting to server
  * @param inputData (javastring object) - contains the User data form
  * calls: None
- * called by:
+ * called by: postRegisterForm()
  */
 
-function validateUser(inputData, user) {
-    console.log("in progress");
-}
+function validateUser(inputData) {
 
+    let resp = {
+        status: "",
+        errorMsg: []
+    };
+    resp.status = false;
+    // validate user registration form 
+    // trim() - takes off trailing and leading spaces
+    if (inputData.username.trim() == "") {
+        resp.errorMsg[resp.errorMsg.length] = "Please enter User Name";
+    }
+    if (inputData.email.trim() == "") {
+        resp.errorMsg[resp.errorMsg.length] = "Please enter email";
+    }
+
+    if (inputData.password.trim() == "") {
+        resp.errorMsg[resp.errorMsg.length] = "Please enter password";
+    }
+    if (inputData.confirmpassword.trim() == "") {
+        resp.errorMsg[resp.errorMsg.length] = "Please enter confirm password";
+    }
+    // validate password and confirm password same
+    if (inputData.password !== inputData.confirmpassword) {
+        resp.errorMsg[resp.errorMsg.length] = "Password does not match with confirm password, please correct";
+    }
+
+    // email format validation
+    if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputData.email)) == false) {
+        resp.errorMsg[resp.errorMsg.length] = "Please enter valid email";
+    }
+
+    // Validate and populate error message
+    if (resp.errorMsg.length > 0) {
+        resp.status = true;
+    }
+    return resp;
+}
 
 // ------ Membership change conflict helpers ------------------
 /*function is to calculate the minimum age of existing members

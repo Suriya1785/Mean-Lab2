@@ -26,12 +26,9 @@ let upload = multer({ storage: storage });
 
 /* Get all teams by league code and sends it to client */
 teamsRouter.get('/byleague/:id', function(request, response) {
-    // set Content-Type for JSON
     let id = request.params.id;
     let teams = getTeams();
-    // console.log(JSON.stringify(teams));
     let matches = getMatchingTeamsByLeague(id, teams);
-    // response.setHeader('Content-Type', 'application/json');
     response.end(JSON.stringify(matches));
 });
 
@@ -52,13 +49,11 @@ teamsRouter.get('/:id', function(request, response) {
  */
 
 teamsRouter.post("/", upload.single('teamimage'), function(request, response) {
-    console.log("Received a POST request to add a team");
-    console.log("BODY -------->" + JSON.stringify(request.body));
+
     try {
         if (request.file.filename) {
             // Save image in /public/images/teams folder
             var image = `/images/teams/${counters.getNextId("team", true)}_${request.file.originalname}`;
-            console.log(`Image saved as: ${image}`);
 
             //Initialize the team points
             let teamPoints = 0;
@@ -81,18 +76,15 @@ teamsRouter.post("/", upload.single('teamimage'), function(request, response) {
                 Members: []
             };
 
-            //console.log("Performing team validation...")
+            //Performing team validation...
             if (!isValidTeam(team)) {
-                //console.log("Invalid  data!")
                 response.statusCode = 400;
                 response.end("Bad Request - Incorrect or Missing Data");
                 return;
             }
-            //console.log("Valid data!")
             let teams = getTeams();
             teams[teams.length] = team;
             saveTeams(teams);
-            //console.log("New team added: ");
             response.statusCode = 200;
             response.end();
         }
@@ -107,8 +99,6 @@ teamsRouter.post("/", upload.single('teamimage'), function(request, response) {
  *  isThereAnyGenderChangeConflicts()
  */
 teamsRouter.put("/", function(request, response) {
-    console.log("Received a PUT request to edit a team");
-    console.log("BODY -------->" + JSON.stringify(request.body));
 
     // assemble team information so we can validate it
     let team = {
@@ -186,7 +176,6 @@ teamsRouter.put("/", function(request, response) {
  */
 teamsRouter.delete("/:id", function(request, response) {
     let id = request.params.id;
-    console.log("Received a DELETE request for team " + id);
 
     let teams = getTeams();
 
@@ -198,9 +187,6 @@ teamsRouter.delete("/:id", function(request, response) {
         match = teams.splice(foundAt, 1);
     }
     saveTeams(teams);
-
-    console.log("Team deleted!");
-    //logOneTeam(match);
     // Note:  even if we didn't find them, send a 200 because they are gone
     response.statusCode = 200;
     response.end();
@@ -232,7 +218,6 @@ function getTeams() {
  * Calls: None
  */
 var saveTeams = function(teams) {
-    console.log("save teams");
     fs.writeFileSync('data/teams.json', JSON.stringify(teams));
 }
 
@@ -241,7 +226,6 @@ var saveTeams = function(teams) {
  * Calls: None
  */
 function getMatchingTeamById(id, data) {
-    console.log("id:" + id);
     let match = data.find(t => t.TeamId == id);
     return match;
 }
@@ -311,7 +295,6 @@ function isThereAnyGenderChangeConflicts(newTeamGender, team) {
     for (let i = 0; i < team.Members.length; i++) {
         // look for member whose gender would conflict with new team gender
         if (team.Members[i].Gender == conflictGender) {
-            //console.log("Found member who is " + team.Members[i].Gender + " on a team witching to " + newTeamGender);
             return true; // found a conflict!
         }
     }
