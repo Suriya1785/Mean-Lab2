@@ -21,8 +21,6 @@ usersRouter.get('/register', function(req, res, next) {
 
 /* Get logout section - Delete user session during logout. */
 usersRouter.get('/logout', function(request, response) {
-    console.log("log out");
-    console.log(request.session.email);
 
     request.session.destroy(function(e) {
         if (e) {
@@ -57,12 +55,9 @@ usersRouter.post('/register', function(request, response, next) {
 usersRouter.post('/login', function(request, response) {
     // get user data from form
     users = getUsers();
-    console.log("login authentication");
-    console.log(JSON.stringify(users));
     var email = request.body.email;
     var password = request.body.password;
     if (authorization.authorize(email, password, users)) {
-        console.log(`request.session: ${request.session}`);
         request.session.email = email;
         response.statusCode = 200;
         response.end();
@@ -79,7 +74,6 @@ usersRouter.post('/login', function(request, response) {
  * Calls: None
  */
 var saveUsers = function(users) {
-    console.log("save users");
     fs.writeFileSync('data/users.json', JSON.stringify(users));
 }
 
@@ -89,7 +83,6 @@ var saveUsers = function(users) {
  * Calls: getUsers(), saveUsers()
  */
 var insertUser = (username, email, password) => {
-    console.log("insertUser");
     var users = getUsers();
 
     // in ES6, if param and prop names are the same,

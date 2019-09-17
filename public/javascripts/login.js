@@ -68,25 +68,9 @@ function postLoginForm() {
 
     $.post("http://localhost:3000/users/login", data, function() {})
         .done(function(res) {
-            console.log("success");
+            //Launch league screen upon successful login and set logout display
             getleagueSection();
             showLogout();
-            // getleagueSection();
-            // showLeagues();
-            // $('#msg').removeClass('alert-danger');
-            // $('#msg').addClass('alert-success');
-            // $('#msg').html('Success!');
-
-            // $('#inputEmail').val('');
-            // $('#inputEmail').attr("disabled", true);
-            // $('#inputPassword').val('');
-            // $('#inputPassword').attr("disabled", true);
-
-            // $('#lock').attr('src', 'img/unlock.png');
-
-            // $('#submitBtn').hide();
-            // $('#logoutBtn').show();
-            // $('#logoutBtn').focus();
         })
         .fail(function(e) {
             console.log(e);
@@ -101,5 +85,4 @@ function postLoginForm() {
             $('#errorMsgId').addClass('alert-danger');
             $('#inputEmail').focus();
         });
-    $('#errorMsgId').show();
 };

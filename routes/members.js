@@ -17,7 +17,6 @@ const counters = require('./../utils/counters');
 membersRouter.get("/:teamid/:memberid", function(request, response) {
     let teamId = request.params.teamid;
     let memberId = request.params.memberid;
-    console.log("Received a GET request for member " + memberId + " on team " + teamId);
     let teamsData = teams.getTeams();
 
     // find the team member on the team
@@ -35,8 +34,6 @@ membersRouter.get("/:teamid/:memberid", function(request, response) {
         response.end("Member Not Found");
         return;
     }
-    //console.log("Returned data is: ");
-    //console.log("Member: " + memberId + " Name: " + match.memberName);
     response.end(JSON.stringify(match));
 });
 
@@ -45,8 +42,6 @@ membersRouter.get("/:teamid/:memberid", function(request, response) {
  */
 membersRouter.post("/:id", function(request, response) {
     let teamId = request.params.id;
-    console.log("Received a POST request to add a member to team " + teamId);
-    console.log("BODY -------->" + JSON.stringify(request.body));
 
     // assemble member information so we can validate it
     let member = {
@@ -59,14 +54,13 @@ membersRouter.post("/:id", function(request, response) {
         Phone: request.body.phone
     };
 
-    //console.log("Performing member validation...")
+    //"Performing member validation..."
     if (!isValidMember(member)) {
-        //console.log("Invalid  data!")
         response.statusCode = 400;
         response.end("Bad Request - Incorrect or Missing Data");
         return;
     }
-    //console.log("Valid data!")
+
     let teamsData = teams.getTeams();
 
     let match = teams.getMatchingTeamById(teamId, teamsData)
@@ -92,9 +86,6 @@ membersRouter.post("/:id", function(request, response) {
     // add the team
     match.Members[match.Members.length] = member;
     teams.saveTeams(teamsData);
-
-    //console.log("New member added: ");
-    //console.log("Name: " + member.MemberName)
     response.statusCode = 200;
     response.end();
 });
@@ -105,9 +96,6 @@ membersRouter.post("/:id", function(request, response) {
 
 membersRouter.put("/:id", function(request, response) {
     let teamId = request.params.id;
-    console.log("Received a PUT request to edit a member on team " + teamId);
-    console.log("BODY -------->" + JSON.stringify(request.body));
-
     // assemble member information so we can validate it
     let member = {
         MemberId: request.body.memberid,
@@ -119,14 +107,11 @@ membersRouter.put("/:id", function(request, response) {
         Phone: request.body.phone
     };
 
-    //console.log("Performing member validation...")
     if (!isValidMember(member)) {
-        //console.log("Invalid  data!")
         response.statusCode = 400;
         response.end("Bad Request - Incorrect or Missing Data");
         return;
     }
-    //console.log("Valid data!")
 
     // find the team
     let teamsData = teams.getTeams();
@@ -167,8 +152,6 @@ membersRouter.put("/:id", function(request, response) {
         return;
     }
     teams.saveTeams(teamsData);
-    //console.log("Member edited: ");
-    //console.log("Name: " + match.MemberName)
     response.statusCode = 200;
     response.end();
 });
@@ -181,7 +164,6 @@ membersRouter.put("/:id", function(request, response) {
 membersRouter.delete("/:teamid/:memberid", function(request, response) {
     let teamId = request.params.teamid;
     let memberId = request.params.memberid;
-    console.log("Received a DELETE request for member " + memberId + " on team " + teamId);
 
     // find the team
     let teamsData = teams.getTeams();
@@ -192,7 +174,6 @@ membersRouter.delete("/:teamid/:memberid", function(request, response) {
         response.end("Team Not Found");
         return;
     }
-    // console.log("Found team!");
 
     // find existing member on the team
     let foundAt = team.Members.findIndex(m => m.MemberId == memberId);

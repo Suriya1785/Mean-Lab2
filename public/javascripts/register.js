@@ -1,4 +1,4 @@
-/* This controls dynamic generation of js for user - register
+/* This controls dynamic generation of js for user - registration
  * Update and delete operations to be done as part of future exercise
  * Author: HartCode Programmer
  * Date: 09/16/2019
@@ -66,49 +66,63 @@ function getRegister() {
 
 /* function is to post register form upon user input 
  * @param: None  
- * Calls: getleagueSection(), showLeagues()
- * Called by: showLogin() 
+ * Called by: getRegister() 
+ * Calls: showLogin() 
  */
 function postRegisterForm() {
     let data = {
         "username": $("#inputUserName").val(),
         "email": $('#inputEmail').val(),
-        "password": $('#inputPassword').val()
+        "password": $('#inputPassword').val(),
+        "confirmpassword": $("#inputConfirmPassword").val()
     };
 
-    $.post("http://localhost:3000/users/register", data, function() {})
-        .done(function(res) {
-            console.log("success");
-            showLogin();
-            // getleagueSection();
-            // showLeagues();
-            // $('#msg').removeClass('alert-danger');
-            // $('#msg').addClass('alert-success');
-            // $('#msg').html('Success!');
+    // perform client validation of user data
+    let isDataValid = validateUserForm(data);
 
-            // $('#inputEmail').val('');
-            // $('#inputEmail').attr("disabled", true);
-            // $('#inputPassword').val('');
-            // $('#inputPassword').attr("disabled", true);
-
-            // $('#lock').attr('src', 'img/unlock.png');
-
-            // $('#submitBtn').hide();
-            // $('#logoutBtn').show();
-            // $('#logoutBtn').focus();
-        })
-        .fail(function(e) {
-            console.log(e);
-            if (e.status === 401) {
-                $('#errorMsgId').html('Account locked!');
-            } else if (e.status === 403) {
-                $('#errorMsgId').html('Invalid data!');
-            } else {
-                $('#errorMsgId').html(`Error: ${e.status}`);
-            }
-            $('#errorMsgId').removeClass('alert-success');
-            $('#errorMsgId').addClass('alert-danger');
-            $('#inputEmail').focus();
-        });
-    $('#errorMsgId').show();
+    if (isDataValid) {
+        $.post("http://localhost:3000/users/register", data, function() {})
+            .done(function(res) {
+                // Launch login section upon successful registration
+                showLogin();
+            })
+            .fail(function(e) {
+                console.log(e);
+                if (e.status === 401) {
+                    $('#errorMsgId').html('Account locked!');
+                } else if (e.status === 403) {
+                    $('#errorMsgId').html('Invalid data!');
+                } else {
+                    $('#errorMsgId').html(`Error: ${e.status}`);
+                }
+                $('#errorMsgId').removeClass('alert-success');
+                $('#errorMsgId').addClass('alert-danger');
+                $('#inputEmail').focus();
+            });
+    }
 };
+
+/* function is to build javascript object and call common validate function
+ *  and read the error status and build error message appropriately
+ * @param: None
+ * Calls: validateUser()
+ * called by: postRegisterForm()
+ */
+function validateUserForm(data) {
+    let temp = "";
+
+    // Send input User form data and create javascript object
+    let resp = validateUser(data);
+
+    if (resp.status == true) {
+        // Run through error message array and build message and update the ta
+        $.each(resp.errorMsg, function(key, value) {
+            temp = temp + "</br>" + value;
+        })
+        $("#errorMsgId").html(temp);
+        $("#errorMsgId").addClass("badInput");
+        return false;
+    } else {
+        return true;
+    }
+}
