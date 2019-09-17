@@ -88,9 +88,7 @@ function postRegisterForm() {
             })
             .fail(function(e) {
                 console.log(e);
-                if (e.status === 401) {
-                    $('#errorMsgId').html('Account locked!');
-                } else if (e.status === 403) {
+                if (e.status === 403) {
                     $('#errorMsgId').html('Invalid data!');
                 } else {
                     $('#errorMsgId').html(`Error: ${e.status}`);
